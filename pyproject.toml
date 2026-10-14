@@ -1,0 +1,61 @@
+[project]
+name = "saniutil"
+version = "0.1.0"
+description = "遮蔽心电图 PDF 中的患者隐私信息（姓名/住院号/床号/医生签名）"
+readme = "README.md"
+license = "MIT"
+authors = [
+    { name = "BruceZhang0808", email = "zhangyixiang0808@gmail.com" }
+]
+keywords = ["ecg", "pdf", "privacy", "redact", "ocr", "paddleocr", "healthcare"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Healthcare Industry",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Medical Science Apps.",
+    "Topic :: Utilities",
+]
+requires-python = ">=3.12"
+# 默认依赖 CPU 版 paddlepaddle：纯 PyPI 可安装，不挑医院机器的硬件；
+# 有 NVIDIA GPU 的机器请按 README 的说明替换为 GPU 版以获得加速
+dependencies = [
+    "numpy>=1.26",
+    "paddleocr>=3.7.0",
+    "paddlepaddle>=3.0.0,<4",
+    "pillow>=12.3.0",
+    "pymupdf>=1.28.2",
+    "tqdm>=4.70.1",
+]
+
+[project.urls]
+Homepage = "https://github.com/BruceZhang0808/saniutil"
+Repository = "https://github.com/BruceZhang0808/saniutil"
+Issues = "https://github.com/BruceZhang0808/saniutil/issues"
+
+[project.scripts]
+saniutil = "saniutil:run"
+
+# 注意：paddlepaddle（CPU）与 paddlepaddle-gpu 都提供 `paddle` 包，不能共存。
+# 有 NVIDIA GPU 的用户按 README 的说明先卸载 CPU 版再装 GPU 版。
+
+[build-system]
+requires = ["uv_build>=0.12.19,<0.13.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "ipykernel>=7.4.0",
+]
+
+[[tool.uv.index]]
+url = "https://mirrors.aliyun.com/pypi/simple"
+default = true
+
+[[tool.uv.index]]
+name = "paddle-cu130"
+url = "https://www.paddlepaddle.org.cn/packages/stable/cu130/"
+explicit = true
