@@ -15,6 +15,12 @@
 pip install saniutil
 ```
 
+国内网络较慢或下载超时时，使用国内镜像源：
+
+```bash
+pip install saniutil -i https://mirrors.aliyun.com/pypi/simple/
+```
+
 安装会自动带上全部依赖（CPU 版 paddlepaddle、paddleocr、pymupdf 等），
 普通电脑（无独立显卡）装完即可直接使用。
 
